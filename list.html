@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" id="sty">
+      *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      #wrap{
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        margin: 20px auto;
+        position: relative;
+      }
+      #wrap ul{
+        position: relative;
+      }
+      #wrap ul li{
+        width: 2px;
+        height: 6px;
+        background: #000;
+        position: absolute;
+        left: 99px;
+        top: 0;
+        -moz-transform-origin: center 100px;
+      }
+      #wrap ul li:nth-child(5n){
+        height: 10px;
+      }
+      #con{
+        width: 10px;
+        height: 10px;
+        background: #000;
+        border-radius: 50%;
+        position: absolute;
+        left: 95px;
+        top: 95px;
+      }
+      #hour{
+        width: 5px;
+        height: 70px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+        left: 98px;
+        top: 35px;
+        -moz-transform-origin: center 65px;
+      }
+      #min{
+        width: 3px;
+        height: 85px;
+        background: #000;
+        border-radius: 50%;
+        position: absolute;
+        left: 98.5px;
+        top: 20px;
+        -moz-transform-origin: center 80px;
+      }
+      #sec{
+        width: 2px;
+        height: 100px;
+        background: gray;
+        border-radius: 50%;
+        position: absolute;
+        left: 98.5px;
+        top: 20px;
+        -moz-transform-origin: center 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <ul id="list">
+
+      </ul>
+      <div id="hour"></div>
+      <div id="min"></div>
+      <div id="sec"></div>
+      <div id="con"></div>
+    </div>
+
+
+  <script type="text/javascript">
+  window.onload=function(){
+    var oWrap=document.getElementById('wrap');
+    var oList=document.getElementById('list');
+    var oSty=document.getElementById('sty');
+
+    var tump='';
+
+    for(var i=0;i<60;i++){
+      var aLi=document.createElement('li');
+      oList.appendChild(aLi);
+
+      tump+='#wrap ul li:nth-child('+(i+1)+'){transform: rotate('+(i+1)*6+'deg);}';
+      oSty.innerHTML+=tump;
+    }
+
+    var oSec=document.getElementById('sec');
+    var oMin=document.getElementById('min');
+    var oHour=document.getElementById('hour');
+    function time(){
+      var date=new Date();
+      var s=date.getSeconds();
+      var m=date.getMinutes()+(s/60);
+      var h=date.getHours()+(m/60);
+
+      oSec.style.transform='rotate('+s*6+'deg)';
+      oMin.style.transform='rotate('+m*6+'deg)';
+      oHour.style.transform='rotate('+h*30+'deg)';
+    }
+    time();
+
+    setInterval(time,1000);
+  }
+</script>
+  </body>
+</html>
